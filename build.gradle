@@ -1,0 +1,46 @@
+apply plugin: 'java'
+
+def srcVersion = 1.8
+def versionLog4j = '2.4.1'
+def versionJersey = '2.22.2'
+def versionJetty = '9.3.7.v20160115'
+def versionJunit = '4.12'
+def versionLombok = '1.16.10'
+def swaggerVersion = '1.5.8'
+
+
+sourceCompatibility = srcVersion
+targetCompatibility = srcVersion
+
+version = 0.1
+group = 'net.sf.arbocdi'
+
+repositories {
+    mavenCentral()
+}
+
+task copyDepts(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.runtime
+}
+
+dependencies {
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: versionLog4j
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: versionLog4j
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: versionLog4j
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: versionJersey
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version: versionJersey
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: versionJersey
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-jaxb', version: versionJersey
+    compile group: 'org.eclipse.jetty', name: 'jetty-server', version: versionJetty
+    compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: versionJetty
+    compile group: 'org.eclipse.jetty.websocket', name: 'websocket-servlet', version: versionJetty
+    compile group: 'org.eclipse.jetty.websocket', name: 'websocket-server', version: versionJetty
+    compile group: 'org.projectlombok', name: 'lombok', version: versionLombok
+    testCompile group: 'junit', name: 'junit', version: versionJunit
+    compile group: 'io.swagger', name: 'swagger-annotations',version: swaggerVersion
+    compile group: 'io.swagger', name: 'swagger-core', version: swaggerVersion
+    compile group: 'io.swagger', name: 'swagger-jersey2-jaxrs', version: swaggerVersion
+    compile group: 'io.swagger', name: 'swagger-models', version: swaggerVersion
+    compile group: 'org.webjars', name: 'swagger-ui', version: '2.1.4'
+}
